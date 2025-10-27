@@ -11,20 +11,30 @@ Edit only inside each TODO section.
 // Problem 1: Reverse a string
 // ===============================
 function reverseString(str) {
-  // TODO
+
+  const charArray=str.split('');
+  const ReversedArray =charArray.reverse();
+  const reversedStr = ReversedArray.join('');
   // input exemple: hello
   // output exemple: olleh
-  return
+  return reversedStr;
 }
 
 // ===============================
 // Problem 2: Find max number
 // ===============================
 function findMax(arr) {
+  let max= arr[0];
+  for (let i=1;i<arr.length;i++){
+    if(arr[i]>max)
+    {
+      max=arr[i]
+    }
+  }
   // TODO
   // input exemple: [3, 9, 2, 8]
   // output exemple: 9
-  return
+  return max;
 }
 
 // ===============================
@@ -41,30 +51,47 @@ function countVowels(str) {
 // Problem 4: Capitalize words
 // ===============================
 function capitalizeWords(sentence) {
+  return sentence.split(' ')  .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
+    .join(' ');            
+}
+
   // TODO
   // input exemple: "hello world"
   // output exemple: "Hello World"
-  return
-}
+  
+
 
 // ===============================
 // Problem 5: Remove duplicates
 // ===============================
 function removeDuplicates(arr) {
+  let seen = {};
+  let result = [];
+  for (let i = 0; i < arr.length; i++) {
+    if (!seen[arr[i]]) {
+      seen[arr[i]] = true;
+      result.push(arr[i]);
+    }
+  }
+  return result;
+}
   // TODO
   // input exemple: [1,1,2,3,3]
   // output exemple: [1,2,3]
-  return
-}
+  
+
 
 // ===============================
 // Problem 6: Sum of numbers
 // ===============================
 function sumArray(arr) {
+  sum =0;
+  for(let i=0; i<arr.length;i++)
+    sum+=arr[i];
   // TODO
   // input exemple: [1,2,3,4]
   // output exemple: 10
-  return
+  return sum
 }
 
 // ===============================
@@ -81,10 +108,18 @@ function fizzBuzz(n) {
 // Problem 8: Palindrome Check
 // ===============================
 function isPalindrome(str) {
+
+
+for(let i =0;i< str.length /2 ;i++)
+  if( str[i] !==str[str.length-1 -i])
+{
+  return false;
+}
   // TODO
   // input exemple: "RaceCar"
   // output exemple: true
-  return
+return true;
+  
 }
 
 // ===============================
@@ -94,18 +129,23 @@ function factorial(n) {
   // TODO
   // input exemple: 5
   // output exemple: 120
-  return
+  return true;
 }
 
 // ===============================
 // Problem 10: Sort numbers ascending
 // ===============================
 function sortNumbers(arr) {
+  arr.sort(function(a,b)
+  {
+     return a-b;
+  }
+  
   // TODO
   // input exemple: [3,1,2]
   // output exemple: [1,2,3]
-  return
-}
+  
+)}
 
 // ===============================
 // Problem 11: Fetch fake data (async)
@@ -131,6 +171,11 @@ function highlightTitle() {
 // Problem 13: Filter even numbers
 // ===============================
 function filterEvenNumbers(arr) {
+  const seen ={};
+  let res=[];
+for (let i =0 ; i< arr.length; i++ )
+  
+
   // TODO
   // input exemple: [1,2,3,4,5]
   // output exemple: [2,4]
@@ -161,6 +206,13 @@ async function fetchAndRenderPosts() {
 // Problem 16: Find missing number in sequence
 // ===============================
 function findMissingNumber(arr) {
+  let n= arr.length+1;
+  for(let i =1 ; i<=n ;i++)
+  {
+    if (!arr.includes(i)){
+      return i;
+    }
+  }
   // TODO
   // input exemple: [1,2,4,5]
   // output exemple: 3
