@@ -41,10 +41,20 @@ function findMax(arr) {
 // Problem 3: Count vowels
 // ===============================
 function countVowels(str) {
+
+ const word = "ordinateur";
+
+ const vowels = "aeiouAEIOU";
+ let count = 0;
+ for (let i=0 ; i<str.length;i++)
+  if (vowels.includes(word[i]))
+  {
+    count++;
+  }
   // TODO
   // input exemple: "OpenAI"
   // output exemple: 4
-  return
+  return count;
 }
 
 // ===============================
@@ -98,16 +108,35 @@ function sumArray(arr) {
 // Problem 7: FizzBuzz
 // ===============================
 function fizzBuzz(n) {
+  const res = [];
+  for(let i =1; i<=n; i++)
+    if (i %3 ==0 && i%5==0)
+    {
+      res.push("FizzBuzz");
+
+     } else if (i % 3 === 0) {
+      res.push("Fizz");
+    } else if (i % 5 === 0) {
+      res.push("Buzz");
+    } else {
+      res.push(i);
+    }
+  
+  return res;
+
+  }
+
+
   // TODO
   // input exemple: 5
   // output exemple: [1,2,"Fizz",4,"Buzz"]
-  return
-}
+
 
 // ===============================
 // Problem 8: Palindrome Check
 // ===============================
 function isPalindrome(str) {
+  str = str.toLowerCase();
 
 
 for(let i =0;i< str.length /2 ;i++)
@@ -136,16 +165,15 @@ function factorial(n) {
 // Problem 10: Sort numbers ascending
 // ===============================
 function sortNumbers(arr) {
-  arr.sort(function(a,b)
-  {
+  arr.sort(function(a,b) {
      return a-b;
-  }
+  });
   
   // TODO
   // input exemple: [3,1,2]
   // output exemple: [1,2,3]
-  
-)}
+  return arr; 
+}
 
 // ===============================
 // Problem 11: Fetch fake data (async)
@@ -171,25 +199,31 @@ function highlightTitle() {
 // Problem 13: Filter even numbers
 // ===============================
 function filterEvenNumbers(arr) {
-  const seen ={};
   let res=[];
 for (let i =0 ; i< arr.length; i++ )
-  
+  if (arr[i] % 2 == 0)
+     res.push(arr[i]);
+
 
   // TODO
   // input exemple: [1,2,3,4,5]
   // output exemple: [2,4]
-  return
+  return res
 }
 
 // ===============================
 // Problem 14: Merge two arrays and sort
 // ===============================
 function mergeAndSort(arr1, arr2) {
+
+  const merged = arr1.concat(arr2);     
+  const sorted = merged.sort((a, b) => a - b);  
+  
+
   // TODO
   // input exemple: [3,1],[2,4]
   // output exemple: [1,2,3,4]
-  return
+  return sorted;
 }
 
 // ===============================
@@ -223,10 +257,21 @@ function findMissingNumber(arr) {
 // Problem 17: Flatten nested array
 // ===============================
 function flattenArray(arr) {
+  let res = [];
+  for (const item of arr)
+  {
+    if(Array.isArray(item))
+    {
+      res =res.concat(flattenArray(item));
+
+    }else {
+      res.push(item);
+    }
+  }
   // TODO
   // input exemple: [1,[2,[3,4]],5]
   // output exemple: [1,2,3,4,5]
-  return
+  return res;
 }
 
 /* ===============================
