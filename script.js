@@ -42,12 +42,11 @@ function findMax(arr) {
 // ===============================
 function countVowels(str) {
 
- const word = "ordinateur";
 
  const vowels = "aeiouAEIOU";
  let count = 0;
  for (let i=0 ; i<str.length;i++)
-  if (vowels.includes(word[i]))
+  if (vowels.includes(str[i]))
   {
     count++;
   }
@@ -155,11 +154,21 @@ return true;
 // Problem 9: Find factorial
 // ===============================
 function factorial(n) {
+   if (n < 0) return undefined;
+
+  let result = 1;
+
+  for (let i = 1; i <= n; i++) {
+    result *= i; 
+  }
+
+  
+  return result;
+}
   // TODO
   // input exemple: 5
   // output exemple: 120
-  return true;
-}
+ 
 
 // ===============================
 // Problem 10: Sort numbers ascending
@@ -179,20 +188,32 @@ function sortNumbers(arr) {
 // Problem 11: Fetch fake data (async)
 // ===============================
 async function fetchFakeUser() {
-  // TODO
-  // input exemple: no input
-  // output exemple: "Leanne Graham" (or any valid name)
-  return
+  try {
+    const response = await fetch("https://jsonplaceholder.typicode.com/users");
+    const users = await response.json();
+    // On choisit un utilisateur au hasard
+    const randomUser = users[Math.floor(Math.random() * users.length)];
+    return randomUser.name;
+  } catch (error) {
+    console.error("Erreur lors du fetch :", error);
+    return "Utilisateur inconnu";
+  }
 }
+
+
 
 // ===============================
 // Problem 12: DOM Manipulation
 // ===============================
 function highlightTitle() {
+    const title = document.getElementById('my-title');
+
+  title.style.color = 'green';
+  title.style.textDecoration = 'underline';
   // TODO
   // input exemple: no input
   // output exemple: "Title turns green and underlined"
-  return
+  return  highlightTitle;
 }
 
 // ===============================
@@ -230,11 +251,37 @@ function mergeAndSort(arr1, arr2) {
 // Problem 15: Fetch and render posts (async + DOM)
 // ===============================
 async function fetchAndRenderPosts() {
-  // TODO
-  // input exemple: no input
-  // output exemple: 3 posts rendered on the page
-  return
+  try {
+    
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
+    const data = await response.json();
+
+   
+    const container = document.getElementById('posts-container');
+
+    
+    container.innerHTML = '';
+
+    
+    data.forEach(post => {
+      const div = document.createElement('div');
+      div.classList.add('post', 'mb-3');
+      div.innerHTML = `
+        <h3>${post.title}</h3>
+        <p>${post.body}</p>
+        <hr>
+      `;
+      container.appendChild(div);
+    });
+
+  } catch (error) {
+    console.error('Error fetching posts:', error);
+  }
 }
+
+// Appel unique de la fonction
+fetchAndRenderPosts();
+
 
 // ===============================
 // Problem 16: Find missing number in sequence
