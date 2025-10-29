@@ -12,44 +12,40 @@ Edit only inside each TODO section.
 // ===============================
 function reverseString(str) {
 
-  const charArray=str.split('');
-  const ReversedArray =charArray.reverse();
-  const reversedStr = ReversedArray.join('');
+  const charArray=str.split('').reverse().join('');
+
   // input exemple: hello
   // output exemple: olleh
-  return reversedStr;
+  return charArray;
 }
 
 // ===============================
 // Problem 2: Find max number
 // ===============================
 function findMax(arr) {
-  let max= arr[0];
-  for (let i=1;i<arr.length;i++){
-    if(arr[i]>max)
-    {
-      max=arr[i]
-    }
-  }
   // TODO
   // input exemple: [3, 9, 2, 8]
   // output exemple: 9
-  return max;
+  return Math.max(...arr);
 }
 
 // ===============================
 // Problem 3: Count vowels
 // ===============================
 function countVowels(str) {
-
-
  const vowels = "aeiouAEIOU";
- let count = 0;
- for (let i=0 ; i<str.length;i++)
-  if (vowels.includes(str[i]))
-  {
-    count++;
-  }
+  let count = 0;
+//  for (let i=0 ; i<str.length;i++)
+//   if (vowels.includes(str[i]))
+//   {
+//     count++;
+//   }
+ Array.from(str).forEach(char => {
+    if (vowels.includes(char)) { 
+      count++;
+    }
+  });
+
   // TODO
   // input exemple: "OpenAI"
   // output exemple: 4
@@ -59,9 +55,15 @@ function countVowels(str) {
 // ===============================
 // Problem 4: Capitalize words
 // ===============================
+
+
 function capitalizeWords(sentence) {
-  return sentence.split(' ')  .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
-    .join(' ');            
+  console.log(sentence.split(' ')  .map(word => word.charAt(0).toUpperCase() + word.slice(1) .join(' ')));
+
+
+
+           return sentence.split(' ')  .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
+    .join(' ');
 }
 
   // TODO
@@ -74,35 +76,46 @@ function capitalizeWords(sentence) {
 // Problem 5: Remove duplicates
 // ===============================
 function removeDuplicates(arr) {
-  let seen = {};
-  let result = [];
-  for (let i = 0; i < arr.length; i++) {
-    if (!seen[arr[i]]) {
-      seen[arr[i]] = true;
-      result.push(arr[i]);
-    }
-  }
-  return result;
-}
-  // TODO
+  //foreach
+//   let seen = {};
+//   let result = [];
+//   for (let i = 0; i < arr.length; i++) {
+//     if (!seen[arr[i]]) {
+//       seen[arr[i]] = true;
+//       result.push(arr[i]);
+//     }
+//   }
+//   return result;
+// }
+//   // TODO
   // input exemple: [1,1,2,3,3]
   // output exemple: [1,2,3]
-  
-
+   let res=[];
+   arr.forEach(e => {
+     if (!res.includes(e)){
+       res.push(e);
+     }
+   });
+  return res;
+}
 
 // ===============================
 // Problem 6: Sum of numbers
 // ===============================
 function sumArray(arr) {
-  sum =0;
-  for(let i=0; i<arr.length;i++)
-    sum+=arr[i];
-  // TODO
-  // input exemple: [1,2,3,4]
-  // output exemple: 10
-  return sum
+ // .reduce()
+//   sum =0;
+//   for(let i=0; i<arr.length;i++)
+//     sum+=arr[i];
+//   // TODO
+//   // input exemple: [1,2,3,4]
+//   // output exemple: 10
+//   return sum
+// }
+  const initialValue = 0;
+  const sum = arr.reduce((accumulator, currentValue) => accumulator + currentValue, initialValue);
+  return sum;
 }
-
 // ===============================
 // Problem 7: FizzBuzz
 // ===============================
@@ -219,17 +232,27 @@ function highlightTitle() {
 // ===============================
 // Problem 13: Filter even numbers
 // ===============================
-function filterEvenNumbers(arr) {
-  let res=[];
-for (let i =0 ; i< arr.length; i++ )
-  if (arr[i] % 2 == 0)
-     res.push(arr[i]);
+ function filterEvenNumbers(arr) {
+//   let res=[];
+// for (let i =0 ; i< arr.length; i++ )
+//   if (arr[i] % 2 == 0)
+//      res.push(arr[i]);
 
 
-  // TODO
-  // input exemple: [1,2,3,4,5]
-  // output exemple: [2,4]
-  return res
+//   // TODO
+//   // input exemple: [1,2,3,4,5]
+//   // output exemple: [2,4]
+//   return res
+// }
+let res=[];
+arr.forEach(num =>
+{
+  if(num % 2 ==0)
+  {
+    res.push(num);
+  }
+});
+return res;
 }
 
 // ===============================
@@ -253,7 +276,7 @@ function mergeAndSort(arr1, arr2) {
 async function fetchAndRenderPosts() {
   try {
     
-    const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=3');
+    const response = await fetch('https://jsonplaceholder.typicode.com/posts?_limit=5');
     const data = await response.json();
 
    
@@ -310,7 +333,7 @@ function flattenArray(arr) {
     if(Array.isArray(item))
     {
       res =res.concat(flattenArray(item));
-
+//de transformer un tableau imbriqué
     }else {
       res.push(item);
     }
@@ -385,4 +408,4 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   document.getElementById("scoreText").textContent = `Score: ${score} / ${problems.length}`;
-});
+});   
